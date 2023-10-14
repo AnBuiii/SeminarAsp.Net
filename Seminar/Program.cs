@@ -3,6 +3,8 @@ using Seminar.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders().AddConsole();
+
 builder.Services.Configure<SeminarDatabaseSettings>(
     builder.Configuration.GetSection("SeminarDatabase"));
 // </snippet_BookStoreDatabaseSettings>
