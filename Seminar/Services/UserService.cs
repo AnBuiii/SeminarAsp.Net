@@ -46,12 +46,25 @@ namespace Seminar.Services
             await _usersCollection.UpdateOneAsync(filter, update);
         }
 
+        public async Task<User?> Login(string username, string password)
+        {
+            var filter1 = Builders<User>.Filter
+                .Eq(user => user.username, username);
+            var filter2 = Builders<User>.Filter
+                .Eq(user => user.password, password);
+            var filter = Builders<User>.Filter.And(filter1, filter2)
+                ;
+            var a = await _usersCollection.Find(filter).FirstOrDefaultAsync();
+            return a;
+        }
+
 
         public async Task RemoveAsync(string id)
         {
             await _usersCollection.DeleteOneAsync(x => x.Id == id);
         }
     }
+    
 
 
     public static class UserEndpoints

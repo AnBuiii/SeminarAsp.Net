@@ -1,0 +1,11 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Logged";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Logged User @Model.Id</p>
+<a asp-controller="Login" asp-action="Logout" class="btn btn-secondary" style="width:150px">
+    Logout
+</a>
