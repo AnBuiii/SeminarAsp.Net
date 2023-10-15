@@ -15,6 +15,13 @@ namespace Seminar.Controllers
         public async Task<IActionResult> Index()
 
         {
+            // if(User)
+            var logged = HttpContext.Session.GetString("userId");
+            if (logged == null)
+            {
+                TempData["error"] = "Login first";
+                return RedirectToAction("Index", "Login");;
+            }
             var tasks = await _userService.GetAsync();
             return View(tasks);
         }
@@ -85,7 +92,6 @@ namespace Seminar.Controllers
         public async Task<IActionResult> EditPOST(String id, User? user)
         {
             await _userService.UpdateAsync(id, user);
-            // await _userService.RemoveAsync(id);
             return RedirectToAction("Index");
         }
     }
